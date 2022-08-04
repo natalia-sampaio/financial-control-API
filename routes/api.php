@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ExpenseReportController;
 use App\Http\Controllers\Api\IncomeReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/income', IncomeReportController::class);
+Route::apiResource('/expense', ExpenseReportController::class);

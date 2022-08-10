@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExpenseReport extends Model
 {
-    protected $fillable = ['description', 'amount', 'date_of_expense'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 }

@@ -11,11 +11,17 @@ class ExpenseReportRepository implements InterfaceExpenseReportRepository
     public function add(ExpenseReportRequest $request)
     {
         return DB::transaction(function () use ($request) {
-            $expenseReport = ExpenseReport::create([
+            $data = [
                 'description' => $request->description,
                 'amount' => $request->amount,
-                'date_of_expense' => $request->date_of_expense
-            ]);
+                'date_of_expense' => $request->date_of_expense,
+            ];
+            
+            if (filled($request->category_id)) {
+                $data['category_id'] = $request->category_id;
+            }
+
+            $expenseReport = ExpenseReport::create($data);
 
             return $expenseReport;
         });

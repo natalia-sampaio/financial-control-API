@@ -22,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/income', IncomeReportController::class);
 Route::apiResource('/expense', ExpenseReportController::class);
+
+Route::get('/income/{year}/{month}', [IncomeReportController::class, 'showIncomeOfTheMonth']);
+Route::get('/expense/{year}/{month}', [ExpenseReportController::class, 'showExpenseOfTheMonth']);
+Route::get('/summary/{year}/{month}', [IncomeReportController::class, 'showSummaryOfTheMonth']);

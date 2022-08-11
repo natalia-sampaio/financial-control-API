@@ -6,6 +6,7 @@ use App\Http\Requests\ExpenseReportRequest;
 use App\Models\ExpenseReport;
 use App\Repositories\ExpenseReportRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ExpenseReportController
@@ -15,9 +16,14 @@ class ExpenseReportController
         
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return ExpenseReport::all();
+        $data = $request;
+        $query = ExpenseReport::query();
+        if ($data->has('description')) {
+            $query->where('description', 'LIKE', "%$data->description%");
+        }
+        return $query->get();
     }
     
     public function store(ExpenseReportRequest $request)
@@ -34,6 +40,13 @@ class ExpenseReportController
     public function show(ExpenseReport $expense)
     {
         return $expense;
+    }
+
+    public function showExpenseOfTheMonth(int $year, int $month)
+    {
+        return ExpenseReport::whereMonth('date_of_expense', $month)
+            ->whereYear('date_of_expense', $year)
+            ->get();
     }
 
     public function update(int $expense, ExpenseReportRequest $request)

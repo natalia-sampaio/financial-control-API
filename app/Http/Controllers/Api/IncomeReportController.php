@@ -6,7 +6,9 @@ use App\Http\Requests\IncomeReportRequest;
 use App\Models\IncomeReport;
 use App\Repositories\IncomeReportRepository;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Prophecy\Call\Call;
 
 class IncomeReportController
 {
@@ -15,10 +17,15 @@ class IncomeReportController
         
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return IncomeReport::all();
-    }
+        $data = $request;
+        $query = IncomeReport::query();
+        if($data->has('description')) {
+            $query->where('description', 'LIKE', "%$data->description%");
+        }
+        return $query->get();
+    } 
     
     public function store(IncomeReportRequest $request)
     {
@@ -34,6 +41,13 @@ class IncomeReportController
     public function show(IncomeReport $income)
     {
         return $income;
+    }
+
+    public function showIncomeOfTheMonth(int $year, int $month)
+    {
+        return IncomeReport::whereMonth('date_of_income', $month)
+                ->whereYear('date_of_income', $year)
+                ->get();
     }
 
     public function update(int $income, IncomeReportRequest $request)

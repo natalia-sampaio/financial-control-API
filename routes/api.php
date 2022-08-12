@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ExpenseReportController;
 use App\Http\Controllers\Api\IncomeReportController;
+use App\Http\Controllers\Api\SummaryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,4 @@ Route::apiResource('/expense', ExpenseReportController::class);
 
 Route::get('/income/{year}/{month}', [IncomeReportController::class, 'showIncomeOfTheMonth']);
 Route::get('/expense/{year}/{month}', [ExpenseReportController::class, 'showExpenseOfTheMonth']);
-Route::get('/summary/{year}/{month}', [IncomeReportController::class, 'showSummaryOfTheMonth']);
+Route::get('/summary/{year}/{month}',[SummaryController::class, 'showSummaryOfTheMonth']);

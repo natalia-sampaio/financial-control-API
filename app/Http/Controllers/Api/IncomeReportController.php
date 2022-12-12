@@ -8,7 +8,6 @@ use App\Repositories\IncomeReportRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Prophecy\Call\Call;
 
 class IncomeReportController
 {

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('expense_reports', function (Blueprint $table) {
-            $table->bigInteger('category_id')->default(8)->unsigned();
+            $table->unsignedBigInteger('category_id')->default(8);
 
             $table->foreign('category_id')->references('id')->on('categories');
         });

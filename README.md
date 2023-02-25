@@ -29,3 +29,4 @@ This is a RESTful API developed as a Challenge Based Learning activity, it is di
 ## Project documentation
 
 [This is the currently published documentation of this project.](https://documenter.getpostman.com/view/22376491/2s8YzUyhQB)
+To use the api you must have a token for authentication, the easiest way of doing that is to open the documentation, click on "Run in Postman" on the top-right corner, login with postman and fork the application to your selected workspace.
